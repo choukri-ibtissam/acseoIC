@@ -1,0 +1,51 @@
+{% extends '@Contact/base.html.twig' %}
+
+{% block body %}
+    <h1>Listes des messages</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Emetteur</th>
+                <th>Email</th>
+                <th>Objet</th>
+                <th>Corps</th>
+                <th>Date damande</th>
+                <th>Traité</th>
+                <th>Date taitement</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for message in messages %}
+            <tr>
+                <td><a href="{{ path('message_show', { 'id': message.id }) }}">{{ message.id }}</a></td>
+                <td>{{ message.emetteur }}</td>
+                <td>{{ message.email }}</td>
+                <td>{{ message.objet }}</td>
+                <td>{{ message.corps }}</td>
+                <td>{% if message.dateDamande %}{{ message.dateDamande|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    {% if message.traite %}
+                        <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    {% else %}
+                        <i class="fa fa-square-o" aria-hidden="true"></i>
+                    {% endif %}</td>
+                <td>{% if message.dateTaitement %}{{ message.dateTaitement|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('message_show', { 'id': message.id }) }}">Voir</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('message_edit', { 'id': message.id }) }}">Editer</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

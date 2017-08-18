@@ -1,0 +1,19 @@
+{% extends '@Contact/base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron">
+        <h1>Contactez nous</h1>
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% form_theme form 'bootstrap_3_layout.html.twig' %}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+            <input class="btn btn-lg btn-primary" type="submit" value="Envoyer" />
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

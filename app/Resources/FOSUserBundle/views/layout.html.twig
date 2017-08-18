@@ -1,0 +1,29 @@
+{% extends "@Contact/base.html.twig" %}
+
+{% block body %}
+    <style>
+        html, body {
+            height:100%;
+            width:100%;
+            margin:0;
+        }
+
+        .center-block {
+            margin:auto;
+        }
+    </style>
+    {% if app.request.hasPreviousSession %}
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="flash-{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% endif %}
+    {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        {% block fos_user_content %}
+
+        {% endblock fos_user_content %}
+    {% endif %}
+{% endblock %}

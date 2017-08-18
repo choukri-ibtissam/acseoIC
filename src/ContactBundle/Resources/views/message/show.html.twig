@@ -1,0 +1,55 @@
+{% extends '@Contact/base.html.twig' %}
+
+{% block body %}
+    <h1>Message</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ message.id }}</td>
+            </tr>
+            <tr>
+                <th>Emetteur</th>
+                <td>{{ message.emetteur }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ message.email }}</td>
+            </tr>
+            <tr>
+                <th>Date damande</th>
+                <td>{% if message.dateDamande %}{{ message.dateDamande|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Date taitement</th>
+                <td>{% if message.dateTaitement %}{{ message.dateTaitement|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Corps</th>
+                <td>{{ message.corps }}</td>
+            </tr>
+            <tr>
+                <th>Objet</th>
+                <td>{{ message.objet }}</td>
+            </tr>
+            <tr>
+                <th>Traite</th>
+                <td>
+                    {% if message.traite %}
+                        <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    {% else %}
+                        <i class="fa fa-square-o" aria-hidden="true"></i>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <a class="btn btn-lg btn-primary" href="{{ path('messages') }}">Retourner à la liste</a>
+        <a class="btn btn-lg btn-warning" href="{{ path('message_edit', { 'id': message.id }) }}">Editer</a>
+        {{ form_start(delete_form) }}
+        <input class="btn btn-lg btn-danger" type="submit" value="Supprimer">
+        {{ form_end(delete_form) }}
+    </div>
+{% endblock %}

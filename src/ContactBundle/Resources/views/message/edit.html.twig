@@ -1,0 +1,17 @@
+{% extends '@Contact/base.html.twig' %}
+
+{% block body %}
+    <h1>Message edit</h1>
+    {% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input class="btn btn-lg btn-success" type="submit" value="Enregistrer" />
+    {{ form_end(edit_form) }}
+
+    <div class="row">
+        <a class="btn btn-lg btn-primary" href="{{ path('messages') }}">Retourner à la liste</a>
+        {{ form_start(delete_form) }}
+        <input class="btn btn-lg btn-danger" type="submit" value="Supprimer">
+        {{ form_end(delete_form) }}
+    </div>
+{% endblock %}
